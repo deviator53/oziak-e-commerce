@@ -38,7 +38,7 @@ export default function SizeGuidePage() {
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-2">Use a Soft Measuring Tape</h3>
                     <p className="text-gray-600">
-                      Use a flexible measuring tape, not a rigid ruler. If you don't have one, use
+                      Use a flexible measuring tape, not a rigid ruler. If you don&apos;t have one, use
                       string and measure against a ruler.
                     </p>
                   </div>
