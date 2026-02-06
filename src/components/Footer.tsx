@@ -129,6 +129,14 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  href="/blog"
+                  className="text-gray-300 text-sm hover:text-white transition-colors"
+                >
+                  Journal
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/appointments"
                   className="text-gray-300 text-sm hover:text-white transition-colors"
                 >
@@ -189,7 +197,9 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-gray-700 pt-4">
           <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left space-y-4 md:space-y-0">
-            <p className="text-gray-400 text-sm">&copy; 2024 Oziak. All rights reserved.</p>
+            <p className="text-gray-400 text-sm">
+              &copy; {new Date().getFullYear()} Oziak. All rights reserved.
+            </p>
             <div className="flex space-x-6">
               <Link
                 href="/privacy"

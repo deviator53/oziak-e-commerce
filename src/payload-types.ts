@@ -322,14 +322,28 @@ export interface Order {
   createdAt: string;
 }
 /**
+ * Manage blog posts and articles for the Oziak journal
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "blog".
  */
 export interface Blog {
   id: number;
+  /**
+   * The main title of the blog post
+   */
   title: string;
+  /**
+   * URL-friendly version of the title (auto-generated if left empty)
+   */
   slug: string;
+  /**
+   * Brief summary of the article (max 300 characters)
+   */
   excerpt: string;
+  /**
+   * Main content of the blog post
+   */
   content: {
     root: {
       type: string;
@@ -345,20 +359,68 @@ export interface Blog {
     };
     [k: string]: unknown;
   };
+  /**
+   * Main image for the blog post
+   */
   featuredImage: number | Media;
+  /**
+   * Author of the blog post
+   */
   author?: string | null;
+  /**
+   * Category for organizing blog posts
+   */
+  category?:
+    | (
+        | 'style-guide'
+        | 'craftsmanship'
+        | 'behind-scenes'
+        | 'fashion-trends'
+        | 'client-stories'
+        | 'fabric-focus'
+        | 'native-wear'
+        | 'news-updates'
+      )
+    | null;
+  /**
+   * Tags for better content discovery
+   */
   tags?:
     | {
-        tag?: string | null;
+        tag: string;
         id?: string | null;
       }[]
     | null;
-  status?: ('draft' | 'published') | null;
+  /**
+   * Estimated reading time in minutes
+   */
+  readingTime?: number | null;
+  /**
+   * Mark as featured article
+   */
+  featured?: boolean | null;
+  status?: ('draft' | 'published' | 'archived') | null;
+  /**
+   * Publication date and time
+   */
   publishedAt?: string | null;
   seo?: {
+    /**
+     * SEO title (leave empty to use post title)
+     */
     title?: string | null;
+    /**
+     * Meta description for search engines (max 160 characters)
+     */
     description?: string | null;
+    /**
+     * Comma-separated keywords for SEO
+     */
     keywords?: string | null;
+    /**
+     * Custom image for social media sharing (optional)
+     */
+    ogImage?: (number | null) | Media;
   };
   updatedAt: string;
   createdAt: string;
@@ -659,12 +721,15 @@ export interface BlogSelect<T extends boolean = true> {
   content?: T;
   featuredImage?: T;
   author?: T;
+  category?: T;
   tags?:
     | T
     | {
         tag?: T;
         id?: T;
       };
+  readingTime?: T;
+  featured?: T;
   status?: T;
   publishedAt?: T;
   seo?:
@@ -673,6 +738,7 @@ export interface BlogSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         keywords?: T;
+        ogImage?: T;
       };
   updatedAt?: T;
   createdAt?: T;

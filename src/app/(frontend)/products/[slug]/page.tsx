@@ -6,12 +6,13 @@ import ProductDetails from '@/components/ProductDetails'
 import { notFound } from 'next/navigation'
 
 interface ProductPageProps {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
+  const { slug } = await params
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
 
@@ -20,7 +21,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
     collection: 'products',
     where: {
       slug: {
-        equals: params.slug,
+        equals: slug,
       },
       status: {
         equals: 'published',
@@ -48,6 +49,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: ProductPageProps) {
+  const { slug } = await params
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
 
@@ -55,7 +57,7 @@ export async function generateMetadata({ params }: ProductPageProps) {
     collection: 'products',
     where: {
       slug: {
-        equals: params.slug,
+        equals: slug,
       },
     },
     limit: 1,
