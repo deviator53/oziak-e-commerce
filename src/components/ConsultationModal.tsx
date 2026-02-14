@@ -90,7 +90,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
           message: data.error || 'Failed to submit. Please try again.',
         })
       }
-    } catch (error) {
+    } catch (_error) {
       setSubmitStatus({
         type: 'error',
         message: 'Network error. Please check your connection.',
