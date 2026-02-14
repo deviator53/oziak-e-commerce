@@ -74,6 +74,7 @@ export interface Config {
     orders: Order;
     blog: Blog;
     pages: Page;
+    contacts: Contact;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -88,6 +89,7 @@ export interface Config {
     orders: OrdersSelect<false> | OrdersSelect<true>;
     blog: BlogSelect<false> | BlogSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
+    contacts: ContactsSelect<false> | ContactsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -155,12 +157,28 @@ export interface User {
   password?: string | null;
 }
 /**
+ * Upload and manage images for products, blog posts, and pages
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
   id: number;
+  /**
+   * Alternative text for accessibility and SEO (required)
+   */
   alt: string;
+  /**
+   * Optional caption displayed with the image
+   */
+  caption?: string | null;
+  /**
+   * Set the focal point for image cropping
+   *
+   * @minItems 2
+   * @maxItems 2
+   */
+  focalPoint?: [number, number] | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -172,6 +190,40 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    card?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    tablet?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    desktop?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -458,6 +510,53 @@ export interface Page {
   createdAt: string;
 }
 /**
+ * Contact form submissions from website visitors
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contacts".
+ */
+export interface Contact {
+  id: number;
+  /**
+   * First name of the contact
+   */
+  firstName: string;
+  /**
+   * Last name of the contact
+   */
+  lastName: string;
+  /**
+   * Email address of the contact
+   */
+  email: string;
+  /**
+   * Phone number (optional)
+   */
+  phone?: string | null;
+  /**
+   * Subject of the inquiry
+   */
+  subject: 'consultation' | 'bespoke' | 'native-wear' | 'order' | 'alterations' | 'appointment' | 'general' | 'other';
+  /**
+   * Message content
+   */
+  message: string;
+  /**
+   * Opted in for newsletter
+   */
+  newsletter?: boolean | null;
+  /**
+   * Status of the inquiry
+   */
+  status?: ('new' | 'in-progress' | 'resolved' | 'closed') | null;
+  /**
+   * Internal notes (not visible to customer)
+   */
+  notes?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -508,6 +607,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'pages';
         value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'contacts';
+        value: number | Contact;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -579,6 +682,8 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  caption?: T;
+  focalPoint?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -590,6 +695,50 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        card?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        tablet?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        desktop?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -759,6 +908,23 @@ export interface PagesSelect<T extends boolean = true> {
         description?: T;
         keywords?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contacts_select".
+ */
+export interface ContactsSelect<T extends boolean = true> {
+  firstName?: T;
+  lastName?: T;
+  email?: T;
+  phone?: T;
+  subject?: T;
+  message?: T;
+  newsletter?: T;
+  status?: T;
+  notes?: T;
   updatedAt?: T;
   createdAt?: T;
 }

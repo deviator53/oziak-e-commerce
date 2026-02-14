@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 
 export default function Hero() {
@@ -25,10 +26,16 @@ export default function Hero() {
         </div>
 
         <div className="relative h-96 lg:h-[600px] order-first lg:order-last">
-          <div className="w-full h-full bg-gray-300 rounded-lg flex items-center justify-center relative overflow-hidden">
+          <div>
             {/* Placeholder for hero image */}
-            <div className="text-2xl text-gray-600 font-medium">
-              <span>Hero Image</span>
+            <div className="relative h-96 lg:h-[600px] order-first lg:order-last">
+              <Image
+                src="/images/oziak-hero.jpeg"
+                alt="Elegant bespoke menswear"
+                fill
+                className="object-cover rounded-lg"
+                priority
+              />
             </div>
             {/* Shimmer effect */}
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer"></div>

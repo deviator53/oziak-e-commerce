@@ -1,4 +1,6 @@
+import Image from 'next/image'
 import Link from 'next/link'
+import BookConsultationButton from './BookConsultationButton'
 
 export default function About() {
   return (
@@ -96,16 +98,19 @@ export default function About() {
               <Link href="/about" className="btn btn-primary">
                 Our Story
               </Link>
-              <Link href="/custom" className="btn btn-outline">
-                Book Consultation
-              </Link>
+              <BookConsultationButton className="btn btn-outline" />
             </div>
           </div>
 
-          <div className="relative">
-            <div className="w-full h-96 lg:h-[500px] bg-gray-200 rounded-lg flex items-center justify-center relative overflow-hidden">
-              <span className="text-xl text-gray-600 font-medium">Craftsmanship Image</span>
-              {/* Shimmer effect */}
+          <div className="relative overflow-hidden rounded-lg">
+            <div className="w-full h-96 lg:h-[500px] relative">
+              <Image
+                src="/images/about-hero.png"
+                alt="Elegant bespoke menswear"
+                fill
+                className="object-cover rounded-lg"
+                priority
+              />
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer"></div>
             </div>
           </div>

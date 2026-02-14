@@ -1,5 +1,7 @@
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import Image from 'next/image'
+import BookConsultationButton from '@/components/BookConsultationButton'
 
 export const metadata = {
   title: 'Custom Tailoring - Oziak',
@@ -36,30 +38,15 @@ export default function CustomPage() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
               <div className="text-center group">
                 <div className="relative h-64 bg-gray-200 rounded-lg overflow-hidden mb-6 group-hover:shadow-lg transition-shadow">
-                  <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-600 flex items-center justify-center">
-                    <span className="text-white text-lg">Custom Suits</span>
-                  </div>
-                </div>
-                <h3 className="text-2xl font-serif mb-4">Bespoke Suits</h3>
-                <p className="text-gray-600 mb-4">
-                  Handcrafted suits tailored to your exact measurements and style preferences.
-                </p>
-                <ul className="text-sm text-gray-500 space-y-1">
-                  <li>• Full canvas construction</li>
-                  <li>• Hand-padded lapels</li>
-                  <li>• Functional buttonholes</li>
-                  <li>• Premium fabrics</li>
-                </ul>
-              </div>
-
-              <div className="text-center group">
-                <div className="relative h-64 bg-gray-200 rounded-lg overflow-hidden mb-6 group-hover:shadow-lg transition-shadow">
-                  <div className="absolute inset-0 bg-gradient-to-br from-gray-700 to-gray-500 flex items-center justify-center">
-                    <span className="text-white text-lg">Custom Shirts</span>
-                  </div>
+                  <Image
+                    src="/images/custom-wear.jpg"
+                    alt="Custom shirts"
+                    fill
+                    className="object-cover"
+                  />
                 </div>
                 <h3 className="text-2xl font-serif mb-4">Dress Shirts</h3>
                 <p className="text-gray-600 mb-4">
@@ -75,9 +62,12 @@ export default function CustomPage() {
 
               <div className="text-center group">
                 <div className="relative h-64 bg-gray-200 rounded-lg overflow-hidden mb-6 group-hover:shadow-lg transition-shadow">
-                  <div className="absolute inset-0 bg-gradient-to-br from-amber-700 to-amber-500 flex items-center justify-center">
-                    <span className="text-white text-lg">Native Wears</span>
-                  </div>
+                  <Image
+                    src="/images/native-wear.jpg"
+                    alt="Native wear"
+                    fill
+                    className="object-cover"
+                  />
                 </div>
                 <h3 className="text-2xl font-serif mb-4">Native Wears</h3>
                 <p className="text-gray-600 mb-4">
@@ -94,19 +84,23 @@ export default function CustomPage() {
 
               <div className="text-center group">
                 <div className="relative h-64 bg-gray-200 rounded-lg overflow-hidden mb-6 group-hover:shadow-lg transition-shadow">
-                  <div className="absolute inset-0 bg-gradient-to-br from-gray-600 to-gray-400 flex items-center justify-center">
-                    <span className="text-white text-lg">Formal Wear</span>
-                  </div>
+                  <Image
+                    src="/images/formal-wear.jpg"
+                    alt="Formal wear"
+                    fill
+                    className="object-cover"
+                  />
                 </div>
                 <h3 className="text-2xl font-serif mb-4">Formal Wear</h3>
                 <p className="text-gray-600 mb-4">
-                  Tuxedos, morning coats, and special occasion wear for life&apos;s important moments.
+                  Traditional Nigerian attire including senators, agbada, and cultural wear for
+                  special occasions.
                 </p>
                 <ul className="text-sm text-gray-500 space-y-1">
-                  <li>• White tie & black tie</li>
-                  <li>• Morning dress</li>
-                  <li>• Dinner jackets</li>
-                  <li>• Accessories included</li>
+                  <li>• Senator styles</li>
+                  <li>• Natives</li>
+                  <li>• Traditional caps</li>
+                  <li>• Custom embroidery</li>
                 </ul>
               </div>
             </div>
@@ -162,9 +156,12 @@ export default function CustomPage() {
               </div>
 
               <div className="relative h-96 bg-gradient-to-br from-amber-200 to-amber-100 rounded-lg overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-amber-600 to-amber-400 flex items-center justify-center">
-                  <span className="text-white text-lg">Traditional Patterns</span>
-                </div>
+                <Image
+                  src="/images/native-wear.jpg"
+                  alt="Traditional patterns"
+                  fill
+                  className="object-cover"
+                />
               </div>
             </div>
 
@@ -210,8 +207,8 @@ export default function CustomPage() {
                 </div>
                 <h3 className="text-xl font-semibold mb-4">Consultation</h3>
                 <p className="text-gray-600">
-                  Personal consultation to discuss your vision, lifestyle, and preferences. We&apos;ll
-                  guide you through fabric selection and design options.
+                  Personal consultation to discuss your vision, lifestyle, and preferences.
+                  We&apos;ll guide you through fabric selection and design options.
                 </p>
               </div>
 
@@ -329,9 +326,12 @@ export default function CustomPage() {
               </div>
 
               <div className="relative h-96 bg-gray-200 rounded-lg overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-600 flex items-center justify-center">
-                  <span className="text-white text-lg">Fabric Swatches</span>
-                </div>
+                <Image
+                  src="/images/fabrics.jpg"
+                  alt="Fabric swatches"
+                  fill
+                  className="object-cover"
+                />
               </div>
             </div>
           </div>
@@ -358,9 +358,9 @@ export default function CustomPage() {
                   <li>• Style consultation</li>
                   <li>• Preliminary measurements</li>
                 </ul>
-                <button className="w-full bg-white text-gray-900 py-3 rounded-md font-semibold hover:bg-gray-100 transition-colors">
+                <BookConsultationButton className="w-full bg-white text-gray-900 py-3 rounded-md font-semibold hover:bg-gray-100 transition-colors">
                   Schedule Visit
-                </button>
+                </BookConsultationButton>
               </div>
 
               <div className="bg-gray-800 p-6 rounded-lg">
@@ -375,9 +375,9 @@ export default function CustomPage() {
                   <li>• Style recommendations</li>
                   <li>• Measurement guide</li>
                 </ul>
-                <button className="w-full bg-white text-gray-900 py-3 rounded-md font-semibold hover:bg-gray-100 transition-colors">
+                <BookConsultationButton className="w-full bg-white text-gray-900 py-3 rounded-md font-semibold hover:bg-gray-100 transition-colors">
                   Book Online
-                </button>
+                </BookConsultationButton>
               </div>
             </div>
 

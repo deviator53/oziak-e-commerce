@@ -5,6 +5,9 @@ import Footer from '@/components/Footer'
 import Link from 'next/link'
 import Image from 'next/image'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export const metadata = {
   title: 'Journal - Oziak',
   description:

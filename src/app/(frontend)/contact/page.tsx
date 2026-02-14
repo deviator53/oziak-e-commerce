@@ -1,5 +1,6 @@
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import ContactForm from '@/components/ContactForm'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -59,11 +60,8 @@ export default function ContactPage() {
                         Visit Our Atelier
                       </h3>
                       <p className="text-gray-600 leading-relaxed">
-                        123 Savile Row
-                        <br />
-                        London, W1S 3PB
-                        <br />
-                        United Kingdom
+                        1 Jere St, opposite Rita Lori Hotels, Garki 2, Abuja 900242, Federal Capital
+                        Territory
                       </p>
                     </div>
                   </div>
@@ -91,7 +89,7 @@ export default function ContactPage() {
                           href="tel:+442071234567"
                           className="hover:text-gray-900 transition-colors"
                         >
-                          +44 20 7123 4567
+                          08173614645
                         </a>
                       </p>
                     </div>
@@ -176,29 +174,17 @@ export default function ContactPage() {
 
                 {/* Map Placeholder */}
                 <div className="mt-8">
-                  <div className="h-64 bg-gray-200 rounded-lg flex items-center justify-center">
-                    <div className="text-center">
-                      <svg
-                        className="w-12 h-12 text-gray-400 mx-auto mb-2"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                        />
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                        />
-                      </svg>
-                      <p className="text-gray-500">Interactive Map</p>
-                    </div>
+                  <div className="h-96 bg-gray-200 rounded-lg overflow-hidden">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d246.2757185464112!2d7.486368245815048!3d9.026174427328739!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104e0b80b5cabffb%3A0xd1d953917e4b82cc!2s1%20Jere%20St%2C%20opposite%20Rita%20Lori%20Hotels%2C%20Garki%202%2C%20Abuja%20900242%2C%20Federal%20Capital%20Territory!5e0!3m2!1sen!2sng!4v1771025443365!5m2!1sen!2sng"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="Oziak Location Map"
+                    ></iframe>
                   </div>
                 </div>
               </div>
@@ -206,132 +192,7 @@ export default function ContactPage() {
               {/* Contact Form */}
               <div>
                 <h2 className="text-3xl font-serif mb-8">Send us a Message</h2>
-
-                <form className="space-y-6">
-                  <div className="grid sm:grid-cols-2 gap-6">
-                    <div>
-                      <label
-                        htmlFor="firstName"
-                        className="block text-sm font-medium text-gray-700 mb-2"
-                      >
-                        First Name *
-                      </label>
-                      <input
-                        type="text"
-                        id="firstName"
-                        name="firstName"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-colors"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label
-                        htmlFor="lastName"
-                        className="block text-sm font-medium text-gray-700 mb-2"
-                      >
-                        Last Name *
-                      </label>
-                      <input
-                        type="text"
-                        id="lastName"
-                        name="lastName"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-colors"
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-colors"
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                      Phone Number
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-colors"
-                    />
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="subject"
-                      className="block text-sm font-medium text-gray-700 mb-2"
-                    >
-                      Subject *
-                    </label>
-                    <select
-                      id="subject"
-                      name="subject"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-colors"
-                      required
-                    >
-                      <option value="">Select a subject</option>
-                      <option value="consultation">Book a Consultation</option>
-                      <option value="bespoke">Bespoke Tailoring Inquiry</option>
-                      <option value="native-wear">Native Wear Consultation</option>
-                      <option value="order">Order Inquiry</option>
-                      <option value="alterations">Alterations Service</option>
-                      <option value="appointment">Schedule Appointment</option>
-                      <option value="general">General Question</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="message"
-                      className="block text-sm font-medium text-gray-700 mb-2"
-                    >
-                      Message *
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows={6}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-colors"
-                      placeholder="Tell us about your requirements, preferred appointment times, or any questions you may have..."
-                      required
-                    ></textarea>
-                  </div>
-
-                  <div className="flex items-start">
-                    <input
-                      type="checkbox"
-                      id="newsletter"
-                      name="newsletter"
-                      className="mt-1 mr-3"
-                    />
-                    <label htmlFor="newsletter" className="text-sm text-gray-600">
-                      I would like to receive updates about new collections, style guides, and
-                      exclusive offers from Oziak.
-                    </label>
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="w-full bg-gray-900 text-white py-4 px-6 rounded-md hover:bg-gray-800 transition-colors font-semibold text-lg"
-                  >
-                    Send Message
-                  </button>
-
-                  <p className="text-sm text-gray-500 text-center">
-                    We typically respond within 24 hours during business days.
-                  </p>
-                </form>
+                <ContactForm />
               </div>
             </div>
           </div>

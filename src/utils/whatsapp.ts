@@ -56,18 +56,18 @@ export function generateWhatsAppMessage(orderData: OrderData): string {
   items.forEach((item, index) => {
     message += `${index + 1}. ${item.name}\n`
     message += `   Quantity: ${item.quantity}\n`
-    message += `   Price: $${item.price.toFixed(2)}\n`
+    message += `   Price: ₦${item.price.toFixed(2)}\n`
     if (item.size) message += `   Size: ${item.size}\n`
     if (item.color) message += `   Color: ${item.color}\n`
     if (item.customizations) message += `   Customizations: ${item.customizations}\n`
-    message += `   Subtotal: $${(item.price * item.quantity).toFixed(2)}\n\n`
+    message += `   Subtotal: ₦${(item.price * item.quantity).toFixed(2)}\n\n`
   })
 
   message += `💰 *Order Summary:*\n`
-  message += `Subtotal: $${subtotal.toFixed(2)}\n`
-  message += `Shipping: $${shipping.toFixed(2)}\n`
-  message += `Tax: $${tax.toFixed(2)}\n`
-  message += `*Total: $${total.toFixed(2)}*\n\n`
+  message += `Subtotal: ₦${subtotal.toFixed(2)}\n`
+  message += `Shipping: ₦${shipping.toFixed(2)}\n`
+  message += `Tax: ₦${tax.toFixed(2)}\n`
+  message += `*Total: ₦${total.toFixed(2)}*\n\n`
 
   message += `⚡ *Action Required:*\n`
   message += `Please confirm this order and provide payment instructions.\n\n`
@@ -153,11 +153,11 @@ export function generateEmailContent(orderData: OrderData): { subject: string; h
               <div class="item">
                 <h4>${item.name}</h4>
                 <p><strong>Quantity:</strong> ${item.quantity}</p>
-                <p><strong>Price:</strong> $${item.price.toFixed(2)}</p>
+                <p><strong>Price:</strong> ₦${item.price.toFixed(2)}</p>
                 ${item.size ? `<p><strong>Size:</strong> ${item.size}</p>` : ''}
                 ${item.color ? `<p><strong>Color:</strong> ${item.color}</p>` : ''}
                 ${item.customizations ? `<p><strong>Customizations:</strong> ${item.customizations}</p>` : ''}
-                <p><strong>Subtotal:</strong> $${(item.price * item.quantity).toFixed(2)}</p>
+                <p><strong>Subtotal:</strong> ₦${(item.price * item.quantity).toFixed(2)}</p>
               </div>
             `,
               )
@@ -166,13 +166,13 @@ export function generateEmailContent(orderData: OrderData): { subject: string; h
 
           <div class="section">
             <h3>Order Summary</h3>
-            <p><strong>Subtotal:</strong> $${subtotal.toFixed(2)}</p>
-            <p><strong>Shipping:</strong> $${shipping.toFixed(2)}</p>
-            <p><strong>Tax:</strong> $${tax.toFixed(2)}</p>
+            <p><strong>Subtotal:</strong> ₦${subtotal.toFixed(2)}</p>
+            <p><strong>Shipping:</strong> ₦${shipping.toFixed(2)}</p>
+            <p><strong>Tax:</strong> ₦${tax.toFixed(2)}</p>
           </div>
 
           <div class="total">
-            Total: $${total.toFixed(2)}
+            Total: ₦${total.toFixed(2)}
           </div>
         </div>
 

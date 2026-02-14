@@ -6,6 +6,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 interface BlogPostPageProps {
   params: Promise<{
     slug: string
@@ -16,6 +19,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
+
+  console.log('Looking for blog post with slug:', slug)
 
   // Fetch the blog post by slug
   const { docs: posts } = await payload.find({
@@ -31,9 +36,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     limit: 1,
   })
 
+  console.log('Found posts:', posts.length)
+
   const post = posts[0]
 
   if (!post) {
+    console.log('Post not found, returning 404')
     notFound()
   }
 

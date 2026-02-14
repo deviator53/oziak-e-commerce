@@ -144,7 +144,7 @@ export default function CheckoutPage() {
                   <strong>Order Number:</strong> {orderDetails?.order?.orderNumber}
                 </p>
                 <p>
-                  <strong>Total:</strong> ${orderDetails?.order?.total?.toFixed(2)}
+                  <strong>Total:</strong> ₦{orderDetails?.order?.total?.toFixed(2)}
                 </p>
               </div>
               <Link href="/shop" className="btn btn-primary">
@@ -288,7 +288,7 @@ export default function CheckoutPage() {
                         <p className="text-sm text-gray-600">Qty: {item.quantity}</p>
                       </div>
                       <div className="font-semibold">
-                        ${(item.price * item.quantity).toFixed(2)}
+                        ₦{(item.price * item.quantity).toFixed(2)}
                       </div>
                     </div>
                   ))}
@@ -297,19 +297,19 @@ export default function CheckoutPage() {
                 <div className="space-y-2 mb-6">
                   <div className="flex justify-between">
                     <span>Subtotal:</span>
-                    <span>${cart.total.toFixed(2)}</span>
+                    <span>₦{cart.total.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Shipping:</span>
-                    <span>{shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}</span>
+                    <span>{shipping === 0 ? 'Free' : `₦${shipping.toFixed(2)}`}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Tax:</span>
-                    <span>${tax.toFixed(2)}</span>
+                    <span>₦{tax.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-lg font-bold border-t border-gray-300 pt-2 mt-4">
                     <span>Total:</span>
-                    <span>${total.toFixed(2)}</span>
+                    <span>₦{total.toFixed(2)}</span>
                   </div>
                 </div>
               </div>

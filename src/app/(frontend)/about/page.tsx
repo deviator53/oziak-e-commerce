@@ -44,9 +44,12 @@ export default function AboutPage() {
                 </p>
               </div>
               <div className="relative h-96 bg-gray-200 rounded-lg overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-600 flex items-center justify-center">
-                  <span className="text-white text-lg">Craftsmanship Image</span>
-                </div>
+                <Image
+                  src="/images/oziak-about.jpeg"
+                  alt="Oziak craftsmanship"
+                  fill
+                  className="object-cover"
+                />
               </div>
             </div>
 
@@ -92,9 +95,12 @@ export default function AboutPage() {
               <h2 className="text-3xl font-serif text-center mb-12">Our Process</h2>
               <div className="grid md:grid-cols-2 gap-12 items-center">
                 <div className="relative h-96 bg-gray-200 rounded-lg overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-gray-700 to-gray-500 flex items-center justify-center">
-                    <span className="text-white text-lg">Tailoring Process</span>
-                  </div>
+                  <Image
+                    src="/images/tailor-process.png"
+                    alt="Tailoring process"
+                    fill
+                    className="object-cover object-top"
+                  />
                 </div>
                 <div>
                   <div className="space-y-6">
@@ -149,8 +155,6 @@ export default function AboutPage() {
                 </div>
               </div>
             </div>
-
-        
           </div>
         </section>
 
