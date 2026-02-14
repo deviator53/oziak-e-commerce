@@ -9,9 +9,9 @@ interface FeaturedProductsProps {
 
 export default function FeaturedProducts({ products }: FeaturedProductsProps) {
   const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-NG', {
       style: 'currency',
-      currency: 'USD',
+      currency: 'NGN',
     }).format(price)
   }
 
@@ -77,7 +77,7 @@ export default function FeaturedProducts({ products }: FeaturedProductsProps) {
                       </span>
                     )}
                   </div>
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                  <div>
                     <AddToCartButton product={product} size="sm" variant="outline" />
                   </div>
                 </div>
