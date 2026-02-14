@@ -58,7 +58,7 @@ export default function CartDropdown() {
 
       {/* Dropdown */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-96 bg-white shadow-2xl rounded-lg z-50 border border-gray-200">
+        <div className="absolute right-0 mt-2 w-screen max-w-sm sm:w-96 bg-white shadow-2xl rounded-lg z-50 border border-gray-200 mx-4 sm:mx-0">
           <div className="p-4 border-b border-gray-200">
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-semibold">

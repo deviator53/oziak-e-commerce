@@ -140,7 +140,7 @@ export default function ProductGrid({ products, categories }: ProductGridProps) 
                       </span>
                     )}
                   </div>
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                  <div>
                     <AddToCartButton product={product} size="sm" variant="outline" />
                   </div>
                 </div>
