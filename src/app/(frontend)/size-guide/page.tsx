@@ -1,4 +1,6 @@
 import { Metadata } from 'next'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
   title: 'Size Guide - Oziak',
@@ -8,7 +10,9 @@ export const metadata: Metadata = {
 
 export default function SizeGuidePage() {
   return (
-    <div className="min-h-screen bg-white">
+    <>
+      <Header />
+      <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <div className="bg-gray-50 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -352,6 +356,7 @@ export default function SizeGuidePage() {
           </div>
         </div>
       </div>
-    </div>
+      <Footer />
+    </>
   )
 }
