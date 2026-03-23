@@ -50,7 +50,7 @@ export default function Testimonials() {
         <div className="max-w-4xl mx-auto">
           {/* Testimonial Card */}
           <div className="bg-gray-50 rounded-lg p-8 md:p-12 relative">
-            <div className="absolute top-8 left-8 text-6xl text-gray-300 font-serif">"</div>
+            <div className="absolute top-8 left-8 text-6xl text-gray-300 font-serif">&ldquo;</div>
 
             <div className="relative z-10">
               <div className="flex items-center mb-6">
