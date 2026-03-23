@@ -61,16 +61,18 @@ export default function CheckoutPage() {
         ...formData,
         items: cart.items.map((item) => ({
           product: item.productId,
+          name: item.name,
           quantity: item.quantity,
           size: item.size,
           color: item.color,
           price: item.price,
           customizations: item.customizations,
+          image: item.image,
         })),
         subtotal: cart.total,
-        shipping: cart.total >= 100 ? 0 : 10, // Free shipping over $100
-        tax: cart.total * 0.08, // 8% tax
-        total: cart.total + (cart.total >= 100 ? 0 : 10) + cart.total * 0.08,
+        shipping: cart.total >= 100000 ? 0 : 2000, // Free shipping over ₦100,000
+        tax: 0, // No tax for now
+        total: cart.total + (cart.total >= 100000 ? 0 : 2000),
       }
 
       const response = await fetch('/api/orders', {
@@ -93,11 +95,11 @@ export default function CheckoutPage() {
           window.open(result.whatsappUrl, '_blank')
         }
       } else {
-        alert('Failed to place order. Please try again.')
+        alert('Failed to send inquiry. Please try again.')
       }
     } catch (error) {
-      console.error('Error placing order:', error)
-      alert('Failed to place order. Please try again.')
+      console.error('Error sending inquiry:', error)
+      alert('Failed to send inquiry. Please try again.')
     } finally {
       setIsSubmitting(false)
     }
@@ -134,21 +136,25 @@ export default function CheckoutPage() {
                 ✓
               </div>
               <h1 className="font-display text-4xl font-semibold mb-4">
-                Order Placed Successfully!
+                Inquiry Sent Successfully!
               </h1>
               <p className="text-gray-600 mb-8">
-                Thank you for your order. We&apos;ll be in touch soon via WhatsApp and email.
+                Thank you for your interest. Our team will contact you shortly via WhatsApp and
+                email to discuss your bespoke order, measurements, and customization options.
               </p>
               <div className="bg-gray-50 p-6 rounded-lg mb-8">
                 <p className="mb-2">
-                  <strong>Order Number:</strong> {orderDetails?.order?.orderNumber}
+                  <strong>Reference Number:</strong> {orderDetails?.order?.orderNumber}
                 </p>
                 <p>
-                  <strong>Total:</strong> ₦{orderDetails?.order?.total?.toFixed(2)}
+                  <strong>Estimated Total:</strong> ₦{orderDetails?.order?.total?.toFixed(2)}
+                </p>
+                <p className="text-sm text-gray-600 mt-2">
+                  *Final price may vary based on customization and measurements
                 </p>
               </div>
               <Link href="/shop" className="btn btn-primary">
-                Continue Shopping
+                Continue Browsing
               </Link>
             </div>
           </div>
@@ -167,7 +173,7 @@ export default function CheckoutPage() {
       <Header />
       <main className="min-h-screen py-8">
         <div className="container">
-          <h1 className="font-display text-4xl font-semibold text-center mb-8">Checkout</h1>
+          <h1 className="font-display text-4xl font-semibold text-center mb-8">Send Inquiry</h1>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             <form onSubmit={handleSubmit} className="lg:col-span-2 space-y-8">
@@ -266,7 +272,7 @@ export default function CheckoutPage() {
                 className="btn btn-primary w-full py-4 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? 'Placing Order...' : 'Place Order'}
+                {isSubmitting ? 'Sending Inquiry...' : 'Send Inquiry'}
               </button>
             </form>
 

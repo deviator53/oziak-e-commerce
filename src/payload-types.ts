@@ -75,6 +75,8 @@ export interface Config {
     blog: Blog;
     pages: Page;
     contacts: Contact;
+    appointments: Appointment;
+    availability: Availability;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -90,6 +92,8 @@ export interface Config {
     blog: BlogSelect<false> | BlogSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     contacts: ContactsSelect<false> | ContactsSelect<true>;
+    appointments: AppointmentsSelect<false> | AppointmentsSelect<true>;
+    availability: AvailabilitySelect<false> | AvailabilitySelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -558,6 +562,45 @@ export interface Contact {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "appointments".
+ */
+export interface Appointment {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  serviceType: 'bespoke-suit' | 'custom-shirt' | 'native-wear' | 'formal-wear' | 'alterations' | 'general';
+  date: string;
+  time: string;
+  notes?: string | null;
+  status?: ('pending' | 'confirmed' | 'cancelled' | 'completed') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Set your available days and times for consultations
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "availability".
+ */
+export interface Availability {
+  id: number;
+  label: string;
+  slotDurationMinutes: number;
+  availableDays?:
+    | {
+        day: '1' | '2' | '3' | '4' | '5' | '6' | '0';
+        startTime: string;
+        endTime: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -611,6 +654,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'contacts';
         value: number | Contact;
+      } | null)
+    | ({
+        relationTo: 'appointments';
+        value: number | Appointment;
+      } | null)
+    | ({
+        relationTo: 'availability';
+        value: number | Availability;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -925,6 +976,41 @@ export interface ContactsSelect<T extends boolean = true> {
   newsletter?: T;
   status?: T;
   notes?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "appointments_select".
+ */
+export interface AppointmentsSelect<T extends boolean = true> {
+  firstName?: T;
+  lastName?: T;
+  email?: T;
+  phone?: T;
+  serviceType?: T;
+  date?: T;
+  time?: T;
+  notes?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "availability_select".
+ */
+export interface AvailabilitySelect<T extends boolean = true> {
+  label?: T;
+  slotDurationMinutes?: T;
+  availableDays?:
+    | T
+    | {
+        day?: T;
+        startTime?: T;
+        endTime?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }

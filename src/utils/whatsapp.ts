@@ -5,6 +5,7 @@ interface OrderItem {
   size?: string
   color?: string
   customizations?: string
+  image?: string
 }
 
 interface CustomerInfo {
@@ -34,44 +35,28 @@ interface OrderData {
 }
 
 export function generateWhatsAppMessage(orderData: OrderData): string {
-  const { orderNumber, customerInfo, shippingAddress, items, subtotal, shipping, tax, total } =
-    orderData
+  const { customerInfo, items, subtotal, shipping, total } = orderData
 
-  let message = `🎩 *OZIAK - New Order Received*\n\n`
-  message += `📋 *Order Details:*\n`
-  message += `Order Number: ${orderNumber}\n`
-  message += `Date: ${new Date().toLocaleDateString()}\n\n`
+  let message = `🛍️ *ORDER INQUIRY*\n\n`
+  message += `I am interested in these items:\n\n`
 
-  message += `👤 *Customer Information:*\n`
-  message += `Name: ${customerInfo.firstName} ${customerInfo.lastName}\n`
-  message += `Email: ${customerInfo.email}\n`
-  message += `Phone: ${customerInfo.phone}\n\n`
-
-  message += `📍 *Shipping Address:*\n`
-  message += `${shippingAddress.street}\n`
-  message += `${shippingAddress.city}, ${shippingAddress.state} ${shippingAddress.postalCode}\n`
-  message += `${shippingAddress.country}\n\n`
-
-  message += `🛍️ *Order Items:*\n`
-  items.forEach((item, index) => {
-    message += `${index + 1}. ${item.name}\n`
-    message += `   Quantity: ${item.quantity}\n`
-    message += `   Price: ₦${item.price.toFixed(2)}\n`
-    if (item.size) message += `   Size: ${item.size}\n`
-    if (item.color) message += `   Color: ${item.color}\n`
-    if (item.customizations) message += `   Customizations: ${item.customizations}\n`
-    message += `   Subtotal: ₦${(item.price * item.quantity).toFixed(2)}\n\n`
+  items.forEach((item) => {
+    message += `*${item.name}*\n`
+    message += `Qty: ${item.quantity} | Size: ${item.size || 'N/A'}\n`
+    if (item.color) message += `Color: ${item.color}\n`
+    message += `Price: ₦${(item.price * item.quantity).toLocaleString()}\n`
+    if (item.image) message += `${item.image}\n`
+    message += `\n`
   })
 
-  message += `💰 *Order Summary:*\n`
-  message += `Subtotal: ₦${subtotal.toFixed(2)}\n`
-  message += `Shipping: ₦${shipping.toFixed(2)}\n`
-  message += `Tax: ₦${tax.toFixed(2)}\n`
-  message += `*Total: ₦${total.toFixed(2)}*\n\n`
+  message += `*Subtotal:* ₦${subtotal.toLocaleString()}\n`
+  message += `*Shipping Fee:* ₦${shipping.toLocaleString()}\n`
+  message += `*Grand Total:* ₦${total.toLocaleString()}\n\n`
 
-  message += `⚡ *Action Required:*\n`
-  message += `Please confirm this order and provide payment instructions.\n\n`
-  message += `#OziakOrder #BespokeStyle #EleganceRedefined`
+  message += `📋 *Customer Details:*\n`
+  message += `Name: ${customerInfo.firstName} ${customerInfo.lastName}\n`
+  message += `Phone: ${customerInfo.phone}\n`
+  message += `Email: ${customerInfo.email}`
 
   return message
 }
@@ -183,6 +168,103 @@ export function generateEmailContent(orderData: OrderData): { subject: string; h
       </div>
     </body>
     </html>
+  `
+
+  return { subject, html }
+}
+
+// ── Appointment notifications ──────────────────────────────────────────────
+
+interface AppointmentData {
+  firstName: string
+  lastName: string
+  email: string
+  phone: string
+  serviceType: string
+  date: string
+  time: string
+  notes?: string
+}
+
+const serviceLabels: Record<string, string> = {
+  'bespoke-suit': 'Bespoke Suit',
+  'custom-shirt': 'Custom Shirt',
+  'native-wear': 'Native Wear',
+  'formal-wear': 'Formal Wear',
+  alterations: 'Alterations',
+  general: 'General Consultation',
+}
+
+export function generateAppointmentWhatsAppMessage(data: AppointmentData): string {
+  const service = serviceLabels[data.serviceType] || data.serviceType
+  const [h, m] = data.time.split(':').map(Number)
+  const period = h >= 12 ? 'PM' : 'AM'
+  const hour = h % 12 || 12
+  const formattedTime = `${hour}:${m.toString().padStart(2, '0')} ${period}`
+
+  let message = `📅 *NEW CONSULTATION BOOKING*\n\n`
+  message += `*Service:* ${service}\n`
+  message += `*Date:* ${new Date(data.date + 'T12:00:00').toLocaleDateString('en-NG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}\n`
+  message += `*Time:* ${formattedTime}\n\n`
+  message += `👤 *Client Details:*\n`
+  message += `Name: ${data.firstName} ${data.lastName}\n`
+  message += `Phone: ${data.phone}\n`
+  message += `Email: ${data.email}\n`
+  if (data.notes) message += `\n📝 *Notes:* ${data.notes}`
+
+  return message
+}
+
+export function generateAppointmentEmailHtml(data: AppointmentData): {
+  subject: string
+  html: string
+} {
+  const service = serviceLabels[data.serviceType] || data.serviceType
+  const [h, m] = data.time.split(':').map(Number)
+  const period = h >= 12 ? 'PM' : 'AM'
+  const hour = h % 12 || 12
+  const formattedTime = `${hour}:${m.toString().padStart(2, '0')} ${period}`
+  const formattedDate = new Date(data.date + 'T12:00:00').toLocaleDateString('en-NG', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
+
+  const subject = `New Consultation Booking – ${data.firstName} ${data.lastName} (${formattedDate})`
+
+  const html = `
+    <!DOCTYPE html><html><head><meta charset="utf-8">
+    <style>
+      body { font-family: Arial, sans-serif; color: #333; line-height: 1.6; }
+      .container { max-width: 560px; margin: 0 auto; padding: 20px; }
+      .header { background: #000; color: #fff; padding: 20px; text-align: center; }
+      .logo { font-size: 22px; font-weight: bold; letter-spacing: 3px; }
+      .tagline { font-size: 11px; opacity: 0.7; margin-top: 4px; }
+      .body { background: #f9f9f9; padding: 24px; }
+      .row { margin-bottom: 10px; }
+      .label { font-weight: bold; color: #000; }
+      .highlight { background: #000; color: #fff; padding: 12px 20px; border-radius: 4px; margin: 20px 0; }
+      .footer { text-align: center; font-size: 12px; color: #999; padding: 16px; }
+    </style></head>
+    <body><div class="container">
+      <div class="header">
+        <div class="logo">OZIAK</div>
+        <div class="tagline">ELEGANCE REDEFINED</div>
+      </div>
+      <div class="body">
+        <h2 style="margin-top:0">New Consultation Booking</h2>
+        <div class="highlight">
+          📅 ${formattedDate} &nbsp;|&nbsp; 🕐 ${formattedTime}<br>
+          <span style="font-size:14px;opacity:0.85">${service}</span>
+        </div>
+        <div class="row"><span class="label">Name:</span> ${data.firstName} ${data.lastName}</div>
+        <div class="row"><span class="label">Email:</span> ${data.email}</div>
+        <div class="row"><span class="label">Phone:</span> ${data.phone}</div>
+        ${data.notes ? `<div class="row"><span class="label">Notes:</span> ${data.notes}</div>` : ''}
+      </div>
+      <div class="footer">Log in to your admin panel to confirm or manage this appointment.</div>
+    </div></body></html>
   `
 
   return { subject, html }

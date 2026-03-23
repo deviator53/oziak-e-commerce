@@ -6,6 +6,8 @@ import Hero from '@/components/Hero'
 import FeaturedProducts from '@/components/FeaturedProducts'
 import Categories from '@/components/Categories'
 import About from '@/components/About'
+import Testimonials from '@/components/Testimonials'
+import ContactSection from '@/components/ContactSection'
 import Newsletter from '@/components/Newsletter'
 
 export default async function HomePage() {
@@ -45,6 +47,8 @@ export default async function HomePage() {
         <Categories categories={categories} />
         <FeaturedProducts products={featuredProducts} />
         <About />
+        <Testimonials />
+        <ContactSection />
         <Newsletter />
       </main>
       <Footer />

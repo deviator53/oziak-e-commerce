@@ -178,7 +178,7 @@ export default function CartDropdown() {
                       onClick={() => setIsOpen(false)}
                       className="block w-full bg-green-600 text-white text-center py-3 rounded-md font-semibold hover:bg-green-700 transition-colors"
                     >
-                      CHECKOUT
+                      SEND INQUIRY
                     </Link>
                     <Link
                       href="/cart"
@@ -189,7 +189,9 @@ export default function CartDropdown() {
                     </Link>
                   </div>
 
-                  <p className="text-xs text-gray-500 text-center mt-3">Free Delivery Worldwide*</p>
+                  <p className="text-xs text-gray-500 text-center mt-3">
+                    Bespoke tailoring made to order
+                  </p>
                 </div>
               </>
             )}

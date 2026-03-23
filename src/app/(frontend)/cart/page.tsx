@@ -263,29 +263,14 @@ export default function CartPage() {
                   href="/checkout"
                   className="block w-full bg-green-600 text-white text-center py-4 rounded-md font-semibold hover:bg-green-700 transition-colors mb-3"
                 >
-                  CHECKOUT
+                  SEND INQUIRY
                 </Link>
 
                 <div className="text-center mb-4">
-                  <p className="text-sm text-gray-600">WE ACCEPT:</p>
-                  <div className="flex justify-center gap-2 mt-2 flex-wrap">
-                    <div className="w-10 h-6 bg-gray-200 rounded flex items-center justify-center text-xs">
-                      VISA
-                    </div>
-                    <div className="w-10 h-6 bg-gray-200 rounded flex items-center justify-center text-xs">
-                      MC
-                    </div>
-                    <div className="w-10 h-6 bg-gray-200 rounded flex items-center justify-center text-xs">
-                      AMEX
-                    </div>
-                    <div className="w-10 h-6 bg-gray-200 rounded flex items-center justify-center text-xs">
-                      PP
-                    </div>
-                  </div>
-                </div>
-
-                <div className="text-sm text-gray-500 text-center">
-                  Got a discount code? Add it in the next step.
+                  <p className="text-sm text-gray-600">Bespoke tailoring made to order</p>
+                  <p className="text-xs text-gray-500 mt-2">
+                    We&apos;ll contact you to discuss measurements and customization
+                  </p>
                 </div>
               </div>
 

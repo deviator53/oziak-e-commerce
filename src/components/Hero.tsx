@@ -1,7 +1,35 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState, useEffect } from 'react'
+
+const sliderImages = [
+  '/images/slider/oziak-1.jpeg',
+  '/images/slider/oziak-2.jpeg',
+  '/images/slider/oziak-3.jpeg',
+  '/images/slider/oziak-4.jpeg',
+  '/images/slider/oziak-5.jpeg',
+  '/images/slider/oziak-6.jpeg',
+  '/images/slider/oziak-7.jpeg',
+  '/images/slider/oziak-8.jpeg',
+  '/images/slider/oziak-9.jpeg',
+  '/images/slider/oziak-10.jpeg',
+  '/images/slider/oziak-11.jpeg',
+  '/images/slider/oziak-12.jpeg',
+  '/images/slider/oziak-13.jpeg',
+]
 
 export default function Hero() {
+  const [current, setCurrent] = useState(0)
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % sliderImages.length)
+    }, 4000)
+    return () => clearInterval(timer)
+  }, [])
+
   return (
     <section className="min-h-[80vh] flex items-center bg-gradient-to-br from-gray-50 to-gray-200 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full">
@@ -25,20 +53,28 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="relative h-96 lg:h-[600px] order-first lg:order-last">
-          <div>
-            {/* Placeholder for hero image */}
-            <div className="relative h-96 lg:h-[600px] order-first lg:order-last">
-              <Image
-                src="/images/oziak-hero.jpeg"
-                alt="Elegant bespoke menswear"
-                fill
-                className="object-cover rounded-lg"
-                priority
+        <div className="relative h-96 lg:h-[600px] order-first lg:order-last rounded-lg overflow-hidden">
+          {sliderImages.map((src, index) => (
+            <Image
+              key={src}
+              src={src}
+              alt={`Oziak bespoke menswear ${index + 1}`}
+              fill
+              className={`object-cover transition-opacity duration-700 ${index === current ? 'opacity-100' : 'opacity-0'}`}
+              priority={index === 0}
+            />
+          ))}
+
+          {/* Dot indicators */}
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+            {sliderImages.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrent(index)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${index === current ? 'bg-white w-4' : 'bg-white/50'}`}
+                aria-label={`Go to slide ${index + 1}`}
               />
-            </div>
-            {/* Shimmer effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer"></div>
+            ))}
           </div>
         </div>
       </div>

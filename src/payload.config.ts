@@ -14,6 +14,8 @@ import { Orders } from './collections/Orders'
 import { Blog } from './collections/Blog'
 import { Pages } from './collections/Pages'
 import { Contacts } from './collections/Contacts'
+import { Appointments } from './collections/Appointments'
+import { Availability } from './collections/Availability'
 import { Settings } from './globals/Settings'
 
 const filename = fileURLToPath(import.meta.url)
@@ -26,7 +28,18 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Products, Categories, Orders, Blog, Pages, Contacts],
+  collections: [
+    Users,
+    Media,
+    Products,
+    Categories,
+    Orders,
+    Blog,
+    Pages,
+    Contacts,
+    Appointments,
+    Availability,
+  ],
   globals: [Settings],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
