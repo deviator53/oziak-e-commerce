@@ -345,7 +345,8 @@ export interface Order {
     country?: string | null;
   };
   items: {
-    product: number | Product;
+    product?: (number | null) | Product;
+    name?: string | null;
     quantity: number;
     size?: string | null;
     color?: string | null;
@@ -891,6 +892,7 @@ export interface OrdersSelect<T extends boolean = true> {
     | T
     | {
         product?: T;
+        name?: T;
         quantity?: T;
         size?: T;
         color?: T;

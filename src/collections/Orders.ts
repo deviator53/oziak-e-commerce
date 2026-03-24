@@ -128,7 +128,10 @@ export const Orders: CollectionConfig = {
           name: 'product',
           type: 'relationship',
           relationTo: 'products',
-          required: true,
+        },
+        {
+          name: 'name',
+          type: 'text',
         },
         {
           name: 'quantity',

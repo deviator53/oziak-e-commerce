@@ -105,7 +105,7 @@ export default function About() {
           <div className="relative overflow-hidden rounded-lg">
             <div className="w-full h-96 lg:h-[500px] relative">
               <Image
-                src="/images/about-hero.png"
+                src="/images/slider/oziak-3.jpeg"
                 alt="Elegant bespoke menswear"
                 fill
                 className="object-cover rounded-lg"

@@ -1,4 +1,7 @@
+'use client'
+
 import Link from 'next/link'
+import BookConsultationButton from './BookConsultationButton'
 
 export default function ContactSection() {
   return (
@@ -14,12 +17,9 @@ export default function ContactSection() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Link
-              href="/contact"
-              className="bg-white text-gray-900 px-8 py-4 rounded-md font-semibold hover:bg-gray-100 transition-colors inline-block"
-            >
+            <BookConsultationButton className="bg-white text-gray-900 px-8 py-4 rounded-md font-semibold hover:bg-gray-100 transition-colors inline-block">
               Book Consultation
-            </Link>
+            </BookConsultationButton>
             <Link
               href="/shop"
               className="border-2 border-white text-white px-8 py-4 rounded-md font-semibold hover:bg-white hover:text-gray-900 transition-colors inline-block"

@@ -118,7 +118,7 @@ export default function ContactPage() {
                           href="mailto:hello@oziak.com"
                           className="hover:text-gray-900 transition-colors"
                         >
-                          hello@oziak.com
+                          info@oziakstitches.com
                         </a>
                       </p>
                     </div>
@@ -134,12 +134,12 @@ export default function ContactPage() {
                       <h3 className="text-xl font-semibold text-gray-900 mb-2">WhatsApp</h3>
                       <p className="text-gray-600">
                         <a
-                          href="https://wa.me/447123456789"
+                          href="https://wa.me/2348173614645"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="hover:text-gray-900 transition-colors"
                         >
-                          +44 7123 456789
+                          +2348173614645
                         </a>
                       </p>
                     </div>

@@ -38,9 +38,12 @@ export async function POST(request: NextRequest) {
     })
 
     // Get settings for WhatsApp and email
-    const settings = await payload.findGlobal({
-      slug: 'settings',
-    })
+    let settings: { contact?: { whatsapp?: string; email?: string } } = {}
+    try {
+      settings = await payload.findGlobal({ slug: 'settings' })
+    } catch {
+      // settings not configured yet, continue without notifications
+    }
 
     const orderData = {
       orderNumber,
@@ -96,6 +99,7 @@ export async function POST(request: NextRequest) {
     })
   } catch (error) {
     console.error('Error creating order:', error)
-    return NextResponse.json({ success: false, error: 'Failed to create order' }, { status: 500 })
+    const message = error instanceof Error ? error.message : String(error)
+    return NextResponse.json({ success: false, error: message }, { status: 500 })
   }
 }
