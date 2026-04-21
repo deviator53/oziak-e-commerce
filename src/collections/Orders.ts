@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 export const Orders: CollectionConfig = {
   slug: 'orders',
+  lockDocuments: false,
   admin: {
     useAsTitle: 'orderNumber',
     defaultColumns: ['orderNumber', 'customerEmail', 'total', 'status', 'createdAt'],

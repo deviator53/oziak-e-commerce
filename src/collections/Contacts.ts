@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 export const Contacts: CollectionConfig = {
   slug: 'contacts',
+  lockDocuments: false,
   admin: {
     useAsTitle: 'email',
     defaultColumns: ['email', 'subject', 'status', 'createdAt'],

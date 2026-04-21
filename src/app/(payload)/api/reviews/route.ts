@@ -21,12 +21,13 @@ export async function POST(request: NextRequest) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     await (payload.create as any)({
       collection: 'reviews',
+      overrideAccess: true,
       data: {
         name,
         role: role || '',
         content,
         rating: Number(rating),
-        featured: false, // requires admin approval
+        featured: false,
       },
     })
 

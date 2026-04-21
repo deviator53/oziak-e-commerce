@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 export const Appointments: CollectionConfig = {
   slug: 'appointments',
+  lockDocuments: false,
   admin: {
     useAsTitle: 'firstName',
     defaultColumns: ['firstName', 'lastName', 'date', 'time', 'serviceType', 'status'],

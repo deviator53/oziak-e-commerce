@@ -2,12 +2,16 @@ import type { CollectionConfig } from 'payload'
 
 export const Reviews: CollectionConfig = {
   slug: 'reviews',
+  lockDocuments: false,
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'role', 'rating', 'featured', 'createdAt'],
   },
   access: {
     read: () => true,
+    create: () => true,
+    update: ({ req: { user } }) => !!user,
+    delete: ({ req: { user } }) => !!user,
   },
   fields: [
     {
