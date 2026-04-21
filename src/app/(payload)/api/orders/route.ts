@@ -38,7 +38,8 @@ export async function POST(request: NextRequest) {
     })
 
     // Get settings for WhatsApp and email
-    let settings: { contact?: { whatsapp?: string; email?: string } } = {}
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let settings: any = {}
     try {
       settings = await payload.findGlobal({ slug: 'settings' })
     } catch {
