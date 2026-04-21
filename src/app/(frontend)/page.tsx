@@ -39,17 +39,19 @@ export default async function HomePage() {
     limit: 6,
   })
 
-  // Fetch featured reviews
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { docs: reviews } = await (payload.find as any)({
-    collection: 'reviews',
-    where: {
-      featured: {
-        equals: true,
-      },
-    },
-    limit: 10,
-  })
+  // Fetch featured reviews (graceful fallback if table doesn't exist yet)
+  let reviews: unknown[] = []
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { docs } = await (payload.find as any)({
+      collection: 'reviews',
+      where: { featured: { equals: true } },
+      limit: 10,
+    })
+    reviews = docs
+  } catch {
+    // reviews table may not exist yet — fallback to hardcoded in Testimonials
+  }
 
   return (
     <>
