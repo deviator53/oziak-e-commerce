@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 
 interface ConsultationModalProps {
   isOpen: boolean
@@ -11,12 +12,17 @@ const CALENDLY_URL =
   process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/your-username/consultation'
 
 export default function ConsultationModal({ isOpen, onClose }: ConsultationModalProps) {
+  const [mounted, setMounted] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     service: '',
   })
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     if (isOpen) {
@@ -35,34 +41,40 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-
     const url = new URL(CALENDLY_URL)
     url.searchParams.append('name', formData.name)
     url.searchParams.append('email', formData.email)
     url.searchParams.append('a1', formData.phone)
     url.searchParams.append('a2', formData.service)
-
     window.open(url.toString(), '_blank', 'noopener,noreferrer')
-
     setTimeout(() => {
       onClose()
       setFormData({ name: '', email: '', phone: '', service: '' })
     }, 500)
   }
 
-  if (!isOpen) return null
+  if (!mounted || !isOpen) return null
 
-  return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center">
-      {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/50" onClick={onClose} aria-hidden="true" />
+  return createPortal(
+    <div
+      style={{ position: 'fixed', inset: 0, zIndex: 99999 }}
+      className="flex items-center justify-center"
+    >
+      {/* Full screen backdrop */}
+      <div
+        style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.6)' }}
+        onClick={onClose}
+      />
 
-      {/* Modal */}
-      <div className="relative bg-white rounded-2xl shadow-2xl max-w-lg w-full mx-4 max-h-[90vh] overflow-y-auto">
-        {/* Close button */}
+      {/* Modal card */}
+      <div
+        style={{ position: 'relative', zIndex: 100000 }}
+        className="bg-white rounded-2xl shadow-2xl max-w-lg w-full mx-4 max-h-[90vh] overflow-y-auto"
+      >
+        {/* Close */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 transition-colors z-10"
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 transition-colors"
           aria-label="Close"
         >
           <svg
@@ -98,7 +110,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                 onChange={handleChange}
                 placeholder="John Doe"
                 required
-                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-colors"
+                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
               />
             </div>
 
@@ -113,7 +125,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                 onChange={handleChange}
                 placeholder="john@example.com"
                 required
-                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-colors"
+                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
               />
             </div>
 
@@ -128,7 +140,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                 onChange={handleChange}
                 placeholder="+234 800 000 0000"
                 required
-                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-colors"
+                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
               />
             </div>
 
@@ -141,7 +153,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                 value={formData.service}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-colors bg-white"
+                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent bg-white"
               >
                 <option value="">Select a service</option>
                 <option value="Bespoke Suit">Bespoke Suit</option>
@@ -155,7 +167,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
 
             <button
               type="submit"
-              className="w-full px-6 py-4 bg-gray-900 text-white font-semibold rounded-lg hover:bg-gray-800 transition-colors mt-2"
+              className="w-full px-6 py-4 bg-gray-900 text-white font-semibold rounded-lg hover:bg-gray-800 transition-colors"
             >
               Continue to Schedule →
             </button>
@@ -166,6 +178,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
           </p>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   )
 }
