@@ -61,7 +61,7 @@ export default async function HomePage() {
         <Categories categories={categories} />
         <FeaturedProducts products={featuredProducts} />
         <About />
-        <Testimonials reviews={reviews as unknown[]} />
+        <Testimonials reviews={reviews as any[]} />
         <ContactSection />
         <Newsletter />
       </main>
