@@ -34,16 +34,25 @@ export default function Hero() {
     <section className="min-h-[80vh] flex items-center bg-gradient-to-br from-gray-50 to-gray-200 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full">
         <div className="z-10 text-center lg:text-left">
-          <h1 className="font-display text-6xl lg:text-7xl font-bold leading-tight mb-6 text-black">
+          <h1
+            className="font-display text-6xl lg:text-7xl font-bold leading-tight mb-6 text-black animate-fade-up"
+            style={{ animationDelay: '0.1s', animationFillMode: 'both' }}
+          >
             Elegance
             <br />
             <span className="italic text-gray-600">Redefined</span>
           </h1>
-          <p className="text-lg lg:text-xl leading-relaxed text-gray-700 mb-8 max-w-lg mx-auto lg:mx-0">
+          <p
+            className="text-lg lg:text-xl leading-relaxed text-gray-700 mb-8 max-w-lg mx-auto lg:mx-0 animate-fade-up"
+            style={{ animationDelay: '0.3s', animationFillMode: 'both' }}
+          >
             Discover the art of bespoke menswear. Each piece is meticulously crafted to embody
             sophistication, style, and timeless elegance that speaks to the modern gentleman.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+          <div
+            className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-up"
+            style={{ animationDelay: '0.5s', animationFillMode: 'both' }}
+          >
             <Link href="/shop" className="btn btn-primary">
               Explore Collection
             </Link>
@@ -53,7 +62,10 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="relative h-96 lg:h-[600px] order-first lg:order-last rounded-lg overflow-hidden">
+        <div
+          className="relative h-96 lg:h-[600px] order-first lg:order-last rounded-lg overflow-hidden animate-fade-in"
+          style={{ animationDelay: '0.2s', animationFillMode: 'both' }}
+        >
           {sliderImages.map((src, index) => (
             <Image
               key={src}

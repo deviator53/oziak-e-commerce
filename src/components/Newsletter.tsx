@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import AnimatedSection from './AnimatedSection'
 
 export default function Newsletter() {
   const [email, setEmail] = useState('')
@@ -29,7 +30,7 @@ export default function Newsletter() {
   return (
     <section className="py-16 bg-black text-white">
       <div className="container">
-        <div className="text-center max-w-2xl mx-auto">
+        <AnimatedSection animation="fade-up" className="text-center max-w-2xl mx-auto">
           <h2 className="font-display text-4xl lg:text-5xl font-semibold mb-4 text-white">
             Stay in Style
           </h2>
@@ -69,7 +70,7 @@ export default function Newsletter() {
               </p>
             )}
           </form>
-        </div>
+        </AnimatedSection>
       </div>
     </section>
   )

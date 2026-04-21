@@ -39,6 +39,18 @@ export default async function HomePage() {
     limit: 6,
   })
 
+  // Fetch featured reviews
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { docs: reviews } = await (payload.find as any)({
+    collection: 'reviews',
+    where: {
+      featured: {
+        equals: true,
+      },
+    },
+    limit: 10,
+  })
+
   return (
     <>
       <Header />
@@ -47,7 +59,7 @@ export default async function HomePage() {
         <Categories categories={categories} />
         <FeaturedProducts products={featuredProducts} />
         <About />
-        <Testimonials />
+        <Testimonials reviews={reviews} />
         <ContactSection />
         <Newsletter />
       </main>

@@ -86,7 +86,7 @@ export default function ContactPage() {
                       <h3 className="text-xl font-semibold text-gray-900 mb-2">Phone</h3>
                       <p className="text-gray-600">
                         <a
-                          href="tel:+442071234567"
+                          href="tel:+2348173614645"
                           className="hover:text-gray-900 transition-colors"
                         >
                           08173614645
@@ -115,10 +115,12 @@ export default function ContactPage() {
                       <h3 className="text-xl font-semibold text-gray-900 mb-2">Email</h3>
                       <p className="text-gray-600">
                         <a
-                          href="mailto:hello@oziak.com"
+                          href="mailto:oziakstitches@gmail.com
+"
                           className="hover:text-gray-900 transition-colors"
                         >
-                          info@oziakstitches.com
+                          oziakstitches@gmail.com
+
                         </a>
                       </p>
                     </div>

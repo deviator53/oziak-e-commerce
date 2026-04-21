@@ -57,10 +57,11 @@ export async function POST(request: NextRequest) {
     }
 
     // Send WhatsApp notification if phone number is configured
+    const whatsappPhone = settings.contact?.whatsapp || process.env.WHATSAPP_NUMBER
     let whatsappUrl = null
-    if (settings.contact?.whatsapp) {
+    if (whatsappPhone) {
       const whatsappMessage = generateWhatsAppMessage(orderData)
-      whatsappUrl = sendWhatsAppMessage(settings.contact.whatsapp, whatsappMessage)
+      whatsappUrl = sendWhatsAppMessage(whatsappPhone, whatsappMessage)
 
       // Update order to mark WhatsApp as sent
       await payload.update({

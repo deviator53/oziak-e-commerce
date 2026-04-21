@@ -16,6 +16,7 @@ import { Pages } from './collections/Pages'
 import { Contacts } from './collections/Contacts'
 import { Appointments } from './collections/Appointments'
 import { Availability } from './collections/Availability'
+import { Reviews } from './collections/Reviews'
 import { Settings } from './globals/Settings'
 
 const filename = fileURLToPath(import.meta.url)
@@ -39,6 +40,7 @@ export default buildConfig({
     Contacts,
     Appointments,
     Availability,
+    Reviews,
   ],
   globals: [Settings],
   editor: lexicalEditor(),
