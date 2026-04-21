@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
     // Create order in database
     // Strip the product relationship field to avoid validation errors
     // (product name/price are stored directly on each item)
-    const sanitizedItems = items.map(({ product: _product, ...item }: unknown) => item)
+    const sanitizedItems = items.map(({ product: _product, ...item }: any) => item)
 
     const order = await payload.create({
       collection: 'orders',
