@@ -20,6 +20,10 @@ export async function POST(request: NextRequest) {
     const orderNumber = `OZ${Date.now().toString().slice(-8)}`
 
     // Create order in database
+    // Strip the product relationship field to avoid validation errors
+    // (product name/price are stored directly on each item)
+    const sanitizedItems = items.map(({ product: _product, ...item }: unknown) => item)
+
     const order = await payload.create({
       collection: 'orders',
       data: {
@@ -27,7 +31,7 @@ export async function POST(request: NextRequest) {
         customerInfo,
         shippingAddress,
         billingAddress,
-        items,
+        items: sanitizedItems,
         subtotal,
         shipping,
         tax,

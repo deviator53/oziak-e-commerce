@@ -125,11 +125,6 @@ export const Orders: CollectionConfig = {
       required: true,
       fields: [
         {
-          name: 'product',
-          type: 'relationship',
-          relationTo: 'products',
-        },
-        {
           name: 'name',
           type: 'text',
         },
