@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { useCart } from '@/context/CartContext'
+import { useToast } from '@/context/ToastContext'
 import type { Product } from '@/payload-types'
 
 interface ProductQuickViewProps {
@@ -13,6 +14,7 @@ interface ProductQuickViewProps {
 
 export default function ProductQuickView({ product, isOpen, onClose }: ProductQuickViewProps) {
   const { addItem } = useCart()
+  const { showToast } = useToast()
   const [selectedSize, setSelectedSize] = useState<string>('')
   const [selectedColor, setSelectedColor] = useState<string>('')
   const [quantity, setQuantity] = useState(1)
@@ -33,7 +35,7 @@ export default function ProductQuickView({ product, isOpen, onClose }: ProductQu
 
   const handleAddToCart = () => {
     if (product.sizes && product.sizes.length > 0 && !selectedSize) {
-      alert('Please select a size')
+      showToast('Please select a size', 'error')
       return
     }
 
@@ -53,7 +55,7 @@ export default function ProductQuickView({ product, isOpen, onClose }: ProductQu
       color: selectedColor,
       image: imageUrl,
     })
-
+    showToast(`${product.name} added to bag`)
     onClose()
   }
 

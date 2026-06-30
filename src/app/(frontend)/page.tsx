@@ -9,6 +9,7 @@ import About from '@/components/About'
 import Testimonials from '@/components/Testimonials'
 import ContactSection from '@/components/ContactSection'
 import Newsletter from '@/components/Newsletter'
+import ProductHighlight from '@/components/ProductHighlight'
 
 export default async function HomePage() {
   const payloadConfig = await config
@@ -53,15 +54,34 @@ export default async function HomePage() {
     // reviews table may not exist yet — fallback to hardcoded in Testimonials
   }
 
+  // Fetch spotlight product (single featured, most recently created)
+  let highlightProduct = null
+  try {
+    const { docs: spotlightDocs } = await payload.find({
+      collection: 'products',
+      where: {
+        and: [{ isFeatured: { equals: true } }, { status: { equals: 'published' } }],
+      },
+      limit: 1,
+      sort: '-createdAt',
+    })
+    highlightProduct = spotlightDocs[0] || null
+  } catch {
+    // fallback
+  }
+
   return (
     <>
       <Header />
       <main>
         <Hero />
-        <Categories categories={categories} />
+        <div id="categories">
+          <Categories categories={categories} />
+        </div>
         <FeaturedProducts products={featuredProducts} />
+        {highlightProduct && <ProductHighlight product={highlightProduct} />}
         <About />
-        <Testimonials reviews={reviews as any[]} />
+        <Testimonials reviews={reviews as unknown[]} />
         <ContactSection />
         <Newsletter />
       </main>

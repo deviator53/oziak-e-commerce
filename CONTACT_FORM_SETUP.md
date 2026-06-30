@@ -53,18 +53,21 @@ Or restart your development server to auto-generate the database schema.
 ## How It Works
 
 ### Frontend
+
 - Users fill out the contact form at `/contact`
 - Form data is validated client-side
 - On submit, data is sent to `/api/contact`
 - Success/error messages are displayed
 
 ### Backend
+
 1. API route receives form data
 2. Creates a new contact entry in Payload CMS
 3. Sends email notification to admin (if configured)
 4. Returns success/error response
 
 ### Admin Panel
+
 - View all contact submissions at `/admin/collections/contacts`
 - Update status (New → In Progress → Resolved → Closed)
 - Add internal notes
@@ -73,9 +76,11 @@ Or restart your development server to auto-generate the database schema.
 ## Testing
 
 ### Without Email (Development)
+
 The form will work without email configuration. Submissions will be saved to Payload CMS, but no emails will be sent.
 
 ### With Email
+
 1. Configure SMTP settings in `.env.local`
 2. Submit a test form
 3. Check your admin email for notification
@@ -84,6 +89,7 @@ The form will work without email configuration. Submissions will be saved to Pay
 ## Email Notification Format
 
 Admins receive emails with:
+
 - Contact name
 - Email address
 - Phone number (if provided)
@@ -93,28 +99,34 @@ Admins receive emails with:
 ## Customization
 
 ### Add More Subject Options
+
 Edit `src/collections/Contacts.ts` and `src/components/ContactForm.tsx` to add more subject options.
 
 ### Change Email Template
+
 Edit the `sendEmailNotification` function in `src/app/(payload)/api/contact/route.ts`.
 
 ### Add Auto-Reply
+
 Modify the API route to send a confirmation email to the customer after submission.
 
 ## Troubleshooting
 
 ### Form not submitting
+
 - Check browser console for errors
 - Verify API route is accessible at `/api/contact`
 - Check network tab for failed requests
 
 ### Emails not sending
+
 - Verify SMTP credentials in `.env.local`
 - Check server logs for email errors
 - Test SMTP connection separately
 - Ensure App Password is used (not regular password for Gmail)
 
 ### Submissions not appearing in admin
+
 - Verify Contacts collection is registered in `payload.config.ts`
 - Check database connection
 - Run database migration

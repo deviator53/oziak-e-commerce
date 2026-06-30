@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useCart } from '@/context/CartContext'
+import { useToast } from '@/context/ToastContext'
 import type { Product } from '@/payload-types'
 
 interface AddToCartButtonProps {
@@ -18,6 +19,7 @@ export default function AddToCartButton({
   variant = 'primary',
 }: AddToCartButtonProps) {
   const { addItem } = useCart()
+  const { showToast } = useToast()
   const [isAdding, setIsAdding] = useState(false)
   const [added, setAdded] = useState(false)
 
@@ -48,6 +50,7 @@ export default function AddToCartButton({
       })
 
       setAdded(true)
+      showToast(`${product.name} added to bag`)
       setTimeout(() => setAdded(false), 2000)
     } catch (error) {
       console.error('Error adding to cart:', error)

@@ -1,5 +1,7 @@
 import React from 'react'
 import { CartProvider } from '@/context/CartContext'
+import { ToastProvider } from '@/context/ToastContext'
+import BackToTop from '@/components/BackToTop'
 import './styles.css'
 
 export const metadata = {
@@ -48,7 +50,12 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         />
       </head>
       <body>
-        <CartProvider>{children}</CartProvider>
+        <ToastProvider>
+          <CartProvider>
+            {children}
+            <BackToTop />
+          </CartProvider>
+        </ToastProvider>
       </body>
     </html>
   )

@@ -347,7 +347,6 @@ export interface Order {
     country?: string | null;
   };
   items: {
-    product?: (number | null) | Product;
     name?: string | null;
     quantity: number;
     size?: string | null;
@@ -663,10 +662,6 @@ export interface PayloadLockedDocument {
         value: number | Category;
       } | null)
     | ({
-        relationTo: 'orders';
-        value: number | Order;
-      } | null)
-    | ({
         relationTo: 'blog';
         value: number | Blog;
       } | null)
@@ -675,20 +670,8 @@ export interface PayloadLockedDocument {
         value: number | Page;
       } | null)
     | ({
-        relationTo: 'contacts';
-        value: number | Contact;
-      } | null)
-    | ({
-        relationTo: 'appointments';
-        value: number | Appointment;
-      } | null)
-    | ({
         relationTo: 'availability';
         value: number | Availability;
-      } | null)
-    | ({
-        relationTo: 'reviews';
-        value: number | Review;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -917,7 +900,6 @@ export interface OrdersSelect<T extends boolean = true> {
   items?:
     | T
     | {
-        product?: T;
         name?: T;
         quantity?: T;
         size?: T;
