@@ -41,7 +41,7 @@ export default async function HomePage() {
   })
 
   // Fetch featured reviews (graceful fallback if table doesn't exist yet)
-  let reviews: any[] = []
+  let reviews: unknown[] = []
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { docs } = await (payload.find as any)({
@@ -81,7 +81,8 @@ export default async function HomePage() {
         <FeaturedProducts products={featuredProducts} />
         {highlightProduct && <ProductHighlight product={highlightProduct} />}
         <About />
-        <Testimonials reviews={reviews as unknown[]} />
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+        <Testimonials reviews={reviews as any[]} />
         <ContactSection />
         <Newsletter />
       </main>
