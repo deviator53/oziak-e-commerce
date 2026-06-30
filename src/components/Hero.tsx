@@ -92,7 +92,7 @@ export default function Hero() {
             className="text-xs uppercase tracking-[0.35em] text-white/70 mb-6 animate-fade-up"
             style={{ animationDelay: '0.1s', animationFillMode: 'both' }}
           >
-            Bespoke Menswear · Lagos
+            Bespoke Menswear · Nigeria
           </p>
           <h1
             className="font-display text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1.05] mb-6 text-white animate-fade-up"
